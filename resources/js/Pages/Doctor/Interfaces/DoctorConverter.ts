@@ -18,5 +18,6 @@ export const toDoctorDTO = (doctor: Doctor): DoctorDTO => {
         name: doctor.name,
         start_date: doctor.start_date.toISOString(),
         state: doctor.state,
+
     };
 };

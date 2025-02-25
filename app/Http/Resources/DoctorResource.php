@@ -21,6 +21,7 @@ class DoctorResource extends JsonResource
             'name' => $this->name,
             'start_date' => Carbon::parse($this->start_date)->format('Y-m-d'),
             'state' => $this->state,
+
         ];
     }
 }

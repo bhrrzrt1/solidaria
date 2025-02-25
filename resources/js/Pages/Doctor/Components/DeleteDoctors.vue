@@ -2,7 +2,7 @@
     <Dialog
         :visible="isVisible"
         modal
-        header="Eliminar Doctor"
+        header="Eliminar doctor"
         :style="{ width: '40vw' }"
         :breakpoints="{ '960px': '75vw', '640px': '100vw' }"
         @update:visible="closeModal"
@@ -98,7 +98,6 @@ const emit = defineEmits<{
 const closeModal = () => {
     emit("emitCloseModal", false);
 };
-
 const emitIdDoctorDelete = (idDoctor: number) => {
     emit("emitSuccessDelete", idDoctor);
 };
@@ -107,3 +106,4 @@ const confirmDelete = () => {
     emit("emitConfirmDelete", doctor.id);
 };
 </script>
+

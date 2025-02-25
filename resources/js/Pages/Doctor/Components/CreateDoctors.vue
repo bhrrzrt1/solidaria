@@ -87,11 +87,13 @@ const localDoctor = ref<Doctor>({
     name: doctor?.name || "",
     code: doctor?.code || "",
     start_date: doctor?.start_date || null,
+
     state: doctor?.state || true,
 });
 
 const emit = defineEmits<{
     (e: "emitCloseModal", state: boolean): void;
+
     (e: "emitSuccessCreate", dataForm: Doctor): void;
 }>();
 

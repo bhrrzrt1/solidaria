@@ -4,4 +4,5 @@ export interface Doctor {
     name: string;
     start_date: Date;
     state: boolean;
+
 }

@@ -56,6 +56,7 @@ export const useDoctors = () => {
             console.error("Error fetching doctor:", error);
         }
     };
+
     // save or edit doctor
     const saveDoctor = async (doctor: Doctor) => {
         father.loadingTable = true;
@@ -119,6 +120,7 @@ export const useDoctors = () => {
         father.statusModal.delete = true;
         father.idDoctor = id;
         await getDoctor(father.idDoctor); 
+
     };
     const closeModalAll = (type: "register" | "delete") => {
         father.statusModal[type] = false;

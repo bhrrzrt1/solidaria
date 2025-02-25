@@ -22,12 +22,14 @@ class DoctorController extends Controller
     public function listDoctor(): JsonResponse
     {
         // authorization so you can access the method
+
         Gate::authorize('viewAny', Doctor::class);
     
         try {
             $name = request('name');
     
             $doctors = Doctor::when($name, function ($query, $name) {
+
                     return $query->where(function ($subQuery) use ($name) {
                         $subQuery->where('name', 'like', "$name%") // Prioritize names that start with the search
                                  ->orWhere('name', 'like', "%$name%"); // Then the ones that contain the search
@@ -58,6 +60,7 @@ class DoctorController extends Controller
     }
     
     // index function to load the data and the filter for the doctor module table
+
     public function index()
     {
         Gate::authorize('viewAny', Doctor::class);
@@ -72,6 +75,7 @@ class DoctorController extends Controller
         $validated = $request->validated();
         // The state field is omitted since when creating a new doctor it will always be created active
         $validated = $request->safe()->except(['state']);
+
         $doctor = Doctor::create($validated);
         return response()->json([
             self::SUCCESS_MESSAGE => true,
@@ -119,6 +123,7 @@ class DoctorController extends Controller
             self::MESSAGE => 'Doctor eliminado',
         ], 200);
     }
+
     public function searchDoctor(Request $request)
     {
         $doctors = (new Filter())->execute(null, $request);
@@ -132,6 +137,7 @@ class DoctorController extends Controller
                 'from' => $doctors->firstItem(),
                 'to' => $doctors->lastItem(),
             ],
+
         ]);
     }
 }

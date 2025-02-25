@@ -26,6 +26,7 @@ class StoreDoctorRequest extends FormRequest
             'name' => 'required|string',
             'start_date' => 'required|date',
             'state' => 'required|boolean',
+
         ];
     }
 }
