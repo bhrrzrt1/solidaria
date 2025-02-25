@@ -56,13 +56,13 @@ export const useDoctors = () => {
             console.error("Error fetching doctor:", error);
         }
     };
-    // guardar o editar doctor
+    // save or edit doctor
     const saveDoctor = async (doctor: Doctor) => {
         father.loadingTable = true;
         try {
-            // convertimos a dto
+            // we convert to discount
             const doctorDTO = toDoctorDTO(doctor);
-            // const para response
+            // const for response
             const response =
                 doctorDTO.id === 0
                     ? await DoctorServices.saveDoctor(doctorDTO)

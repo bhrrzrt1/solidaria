@@ -20,10 +20,10 @@ class DoctorController extends Controller
     private const MESSAGE = 'message';
     private const DATA = 'data';
     private const PAGINATION = 'pagination';
-    // funcion para retornar la vista del modulo doctor
+    // function to return the view of the doctor module
     public function listDoctor(): JsonResponse
     {
-        // autorizacion para que pueda acceder al metodo
+        // authorization so you can access the method
         Gate::authorize('viewAny', Doctor::class);
     
         try {
@@ -31,12 +31,12 @@ class DoctorController extends Controller
     
             $doctors = Doctor::when($name, function ($query, $name) {
                 return $query->where(function ($subQuery) use ($name) {
-                    $subQuery->where('name', 'like', "$name%") // Prioriza nombres que empiezan con la búsqueda
-                             ->orWhere('name', 'like', "%$name%"); // Luego los que contienen la búsqueda
+                    $subQuery->where('name', 'like', "$name%") // Prioritize names that start with the search
+                             ->orWhere('name', 'like', "%$name%"); // Then the ones that contain the search
                 });
             })
-            ->orderByRaw("name LIKE ? DESC", ["$name%"]) // Fuerza prioridad a los que inician con el término
-            ->orderBy('id', 'asc') // Luego ordena por ID ascendente
+            ->orderByRaw("name LIKE ? DESC", ["$name%"]) // Force priority to those who start with the term
+            ->orderBy('id', 'asc') // Then sort by ascending ID
             ->paginate(20);
     
             return response()->json([
@@ -57,7 +57,7 @@ class DoctorController extends Controller
             ], 500);
         }
     }
-    // funcion index para cargar los datos y el filtro para la tabla del modulo doctor
+    // index function to load the data and the filter for the doctor module table
     public function index()
     {
         Gate::authorize('viewAny', Doctor::class);
@@ -70,7 +70,7 @@ class DoctorController extends Controller
     {
         Gate::authorize('create', Doctor::class);
         $validated = $request->validated();
-        // se omite el campo state ya que al crear un nuevo doctor siempre se creara activo
+        // The state field is omitted since when creating a new doctor it will always be created active
         $doctor = Doctor::create($validated);
         return response()->json([
             self::SUCCESS_MESSAGE => true,

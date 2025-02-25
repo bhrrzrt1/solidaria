@@ -40,7 +40,7 @@
                 />
                 <label for="fecha">Fecha</label>
             </FloatLabel>
-            <!-- botones para cancelar y guardar o actualizar -->
+            <!-- buttons to cancel and save or update -->
             <div class="flex justify-end gap-4">
                 <Button
                     label="Guardar"

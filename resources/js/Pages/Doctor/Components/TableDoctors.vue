@@ -14,7 +14,7 @@
         :loading="loadingTable"
     >
         <template #paginatorstart>
-            <!-- detalle de las paginas y cantidad de datos que existen -->
+            <!-- details of the pages and amount of data that exists -->
             <span>
                 Doctores {{ pagination.from }} a {{ pagination.to }} de
                 {{ pagination.total }}</span

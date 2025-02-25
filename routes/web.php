@@ -5,16 +5,16 @@ use App\Http\Controllers\DoctorController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// INICIO DEL SISTEMA
+// SYSTEM START
 Route::get('/', [DashboardController::class, 'Welcome'])->name('Welcome');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
-    // DASHBOARD inicial
+    // initial DASHBOARD
     Route::get('/dashboard', [DashboardController::class, 'Dashboard'])->name('dashboard');
     Route::prefix('modulo')->group(function () {
         // DOCTOR
         Route::resource('doctor', DoctorController::class)->except(['create']);
-        // ruta para listar
+        // path/route to list
         Route::get('doctors/list', [DoctorController::class, 'listDoctor'])->name('doctor.list');
     });
 });

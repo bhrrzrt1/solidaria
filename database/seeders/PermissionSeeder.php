@@ -13,7 +13,7 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        // ! se crea los permisos para cada modulo
+        // ! Permissions are created for each module
         Permission::create(['name' => 'create doctors']);
         Permission::create(['name' => 'view doctors']);
         Permission::create(['name' => 'edit doctors']);
