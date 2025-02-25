@@ -141,6 +141,7 @@ const menuItems = [
         icon: "pi pi-heart",
         submenu: [
             { label: "Registro", route: "profile.show", icon: "pi pi-plus" },
+            { label: "Doctores", route: "doctor.index", icon: "pi pi-user" },
             { label: "Consultas", route: "dashboard", icon: "pi pi-calendar" },
             { label: "Pacientes", route: "dashboard", icon: "pi pi-users" },
         ],
