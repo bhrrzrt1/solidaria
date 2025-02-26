@@ -25,6 +25,7 @@ class UpdateDoctorRequest extends FormRequest
             'code' => 'required|string',
             'name' => 'required|string',
             'start_date' => 'required|date',
+            'state' => 'required|boolean',
         ];
     }
 }

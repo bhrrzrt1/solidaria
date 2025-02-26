@@ -3,4 +3,5 @@ export interface DoctorDTO {
     code: string;
     name: string;
     start_date: string;
+    state: boolean;
 }

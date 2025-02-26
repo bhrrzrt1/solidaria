@@ -16,6 +16,7 @@ return new class extends Migration
             $table->char('code', 10)->unique();
             $table->string('name', 40)->unique();
             $table->timestamp('start_date');
+            $table->boolean('state')->default(true)->comment('true: activo, false: inactivo');
             $table->timestamps();
         });
     }

@@ -51,6 +51,14 @@
         <Column field="code" header="Codigo"></Column>
         <Column field="name" header="Nombre"></Column>
         <Column field="start_date" header="Fecha de inicio"></Column>
+        <Column header="Estado" align-frozen="left">
+            <template #body="slotProps">
+                <Tag
+                    :severity="colorTag(slotProps.data.state)"
+                    :value="textTag(slotProps.data.state)"
+                />
+            </template>
+        </Column>
         <Column>
             <template #body="slotProps">
                 <div class="flex gap-2">
@@ -80,6 +88,7 @@
 import { Pagination } from "@/Interfaces/Pagination";
 import { ref } from "vue";
 import { Badge, Button, Column, DataTable, InputText, Tag } from "primevue";
+import { colorTag, textTag } from "@/Utils/state";
 import debounce from "lodash.debounce";
 import { DoctorDTO } from "../Interfaces/DoctorDTO";
 

@@ -7,8 +7,6 @@ use App\Models\Doctor;
 use App\Http\Requests\StoreDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
 use App\Http\Resources\DoctorResource;
-use App\Pipelines\FilterByDate;
-use App\Pipelines\FilterByName;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -30,14 +28,15 @@ class DoctorController extends Controller
             $name = request('name');
     
             $doctors = Doctor::when($name, function ($query, $name) {
-                return $query->where(function ($subQuery) use ($name) {
-                    $subQuery->where('name', 'like', "$name%") // Prioritize names that start with the search
-                             ->orWhere('name', 'like', "%$name%"); // Then the ones that contain the search
-                });
-            })
-            ->orderByRaw("name LIKE ? DESC", ["$name%"]) // Force priority to those who start with the term
-            ->orderBy('id', 'asc') // Then sort by ascending ID
-            ->paginate(20);
+                    return $query->where(function ($subQuery) use ($name) {
+                        $subQuery->where('name', 'like', "$name%") // Prioritize names that start with the search
+                                 ->orWhere('name', 'like', "%$name%"); // Then the ones that contain the search
+                    })
+                    ->orderByRaw('state DESC'); // Only applies if there is a search
+                })
+                ->orderByRaw("name LIKE ? DESC", ["$name%"]) // Prioritize names that start with search
+                ->orderBy('id', 'asc') // Then sort by ascending ID
+                ->paginate(20);
     
             return response()->json([
                 self::DATA => DoctorResource::collection($doctors),
@@ -57,6 +56,7 @@ class DoctorController extends Controller
             ], 500);
         }
     }
+    
     // index function to load the data and the filter for the doctor module table
     public function index()
     {
@@ -71,6 +71,7 @@ class DoctorController extends Controller
         Gate::authorize('create', Doctor::class);
         $validated = $request->validated();
         // The state field is omitted since when creating a new doctor it will always be created active
+        $validated = $request->safe()->except(['state']);
         $doctor = Doctor::create($validated);
         return response()->json([
             self::SUCCESS_MESSAGE => true,
@@ -118,15 +119,9 @@ class DoctorController extends Controller
             self::MESSAGE => 'Doctor eliminado',
         ], 200);
     }
-
     public function searchDoctor(Request $request)
     {
-        // array of filter classes to apply
-        $filters = [
-            FilterByName::class,
-            FilterByDate::class,
-        ];
-        $doctors = (new Filter())->execute($filters);
+        $doctors = (new Filter())->execute(null, $request);
         return response()->json([
             self::DATA => DoctorResource::collection($doctors),
             self::PAGINATION => [
@@ -137,7 +132,6 @@ class DoctorController extends Controller
                 'from' => $doctors->firstItem(),
                 'to' => $doctors->lastItem(),
             ],
-            'filters applied' => $filters,
         ]);
     }
 }

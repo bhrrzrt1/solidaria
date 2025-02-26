@@ -40,6 +40,14 @@
                 />
                 <label for="fecha">Fecha</label>
             </FloatLabel>
+            <ToggleButton
+                id="state"
+                v-model="localDoctor.state"
+                onLabel="Activo"
+                offLabel="Inactivo"
+                onIcon="pi pi-check"
+                offIcon="pi pi-times"
+            />
             <!-- buttons to cancel and save or update -->
             <div class="flex justify-end gap-4">
                 <Button
@@ -79,10 +87,11 @@ const localDoctor = ref<Doctor>({
     name: doctor?.name || "",
     code: doctor?.code || "",
     start_date: doctor?.start_date || null,
+    state: doctor?.state || true,
 });
 
 const emit = defineEmits<{
-    (e: "emitCloseModal", dataForm: boolean): void;
+    (e: "emitCloseModal", state: boolean): void;
     (e: "emitSuccessCreate", dataForm: Doctor): void;
 }>();
 

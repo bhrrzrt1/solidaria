@@ -21,6 +21,7 @@
             <!-- modal to remove doctor -->
             <DeleteDoctors
                 :is-visible="father.statusModal.delete"
+                :doctor="father.doctorData"
                 :id-doctor="father.idDoctor"
                 @emit-close-modal="closeModalAll('delete')"
                 @emit-success-delete="deleteDoctor"

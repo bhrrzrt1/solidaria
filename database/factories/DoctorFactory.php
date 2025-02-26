@@ -20,6 +20,7 @@ class DoctorFactory extends Factory
             'code' => $this->faker->unique()->numerify('DOC###'),
             'name' => $this->faker->name(),
             'start_date' => $this->faker->dateTimeBetween('-5 years', 'now'),
+            'state' => $this->faker->boolean(),
         ];
     }
 }

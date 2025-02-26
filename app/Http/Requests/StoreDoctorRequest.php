@@ -25,6 +25,7 @@ class StoreDoctorRequest extends FormRequest
             'code' => 'required|unique:doctors|string',
             'name' => 'required|string',
             'start_date' => 'required|date',
+            'state' => 'required|boolean',
         ];
     }
 }

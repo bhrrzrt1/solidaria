@@ -115,9 +115,10 @@ export const useDoctors = () => {
         await getDoctor(father.idDoctor);
         father.statusModal.register = true;
     };
-    const emitIdDoctorDelete = (id: number) => {
+    const emitIdDoctorDelete = async (id: number) => { 
         father.statusModal.delete = true;
         father.idDoctor = id;
+        await getDoctor(father.idDoctor); 
     };
     const closeModalAll = (type: "register" | "delete") => {
         father.statusModal[type] = false;

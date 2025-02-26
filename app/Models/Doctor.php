@@ -13,6 +13,7 @@ class Doctor extends Model
         'code',
         'name',
         'start_date',
+        'state',
     ];
 
     protected function casts()
