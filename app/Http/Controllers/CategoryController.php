@@ -29,7 +29,9 @@ class CategoryController extends Controller
         try {
             $categories = Category::when($request->query('name'), function ($query, $name) {
                 return $query->where('name', 'like', "%$name%");
-            })->paginate(10);
+            })
+                ->orderBy('created_at', 'asc')
+                ->paginate(10);
 
             return response()->json([
                 self::DATA => CategoryResource::collection($categories),
@@ -49,6 +51,9 @@ class CategoryController extends Controller
             ], 500);
         }
     }
+
+
+    // ! don't use a single request for store and update methods, create a separate request for each method storeRequest and updateRequest
 
     public function store(CategoryRequest $request): JsonResponse
     {

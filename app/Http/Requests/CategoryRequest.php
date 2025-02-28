@@ -8,18 +8,18 @@ class CategoryRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; 
+        return true;
     }
 
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:categories,name,',
+            'name' => 'required|string|max:255|unique:categories,name',
         ];
     }
-    
 
 
+    //  ! not used
     public function messages(): array
     {
         return [
