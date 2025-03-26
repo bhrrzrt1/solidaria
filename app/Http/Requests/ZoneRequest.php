@@ -8,7 +8,7 @@ class ZoneRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; 
+        return true;
     }
 
     public function rules()
@@ -18,6 +18,7 @@ class ZoneRequest extends FormRequest
         ];
     }
 
+    // ! not used
     public function messages(): array
     {
         return [

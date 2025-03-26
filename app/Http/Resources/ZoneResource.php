@@ -8,7 +8,10 @@ use Carbon\Carbon;
 
 class ZoneResource extends JsonResource
 {
-    
+
+    // ! using the timeZone is redundant because it is already set in the .env
+
+
     public function toArray(Request $request): array
     {
         return [

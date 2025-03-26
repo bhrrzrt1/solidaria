@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // ! created column state in the table
         Schema::create('zones', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
